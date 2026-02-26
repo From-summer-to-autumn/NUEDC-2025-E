@@ -1,0 +1,200 @@
+/**
+ * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
+ * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
+ * @cliArgs --device "MSPM0G350X" --part "Default" --package "LQFP-64(PM)" --product "mspm0_sdk@2.05.01.01"
+ * @v2CliArgs --device "MSPM0G3507" --package "LQFP-64(PM)" --product "mspm0_sdk@2.05.01.01"
+ * @versions {"tool":"1.24.0+4110"}
+ */
+
+/**
+ * Import the modules used in this configuration.
+ */
+const GPIO          = scripting.addModule("/ti/driverlib/GPIO", {}, false);
+const GPIO1         = GPIO.addInstance();
+const GPIO2         = GPIO.addInstance();
+const GPIO3         = GPIO.addInstance();
+const GPIO4         = GPIO.addInstance();
+const GPIO5         = GPIO.addInstance();
+const I2C           = scripting.addModule("/ti/driverlib/I2C", {}, false);
+const I2C1          = I2C.addInstance();
+const PWM           = scripting.addModule("/ti/driverlib/PWM", {}, false);
+const PWM1          = PWM.addInstance();
+const PWM2          = PWM.addInstance();
+const SYSCTL        = scripting.addModule("/ti/driverlib/SYSCTL");
+const TIMER         = scripting.addModule("/ti/driverlib/TIMER", {}, false);
+const TIMER1        = TIMER.addInstance();
+const UART          = scripting.addModule("/ti/driverlib/UART", {}, false);
+const UART1         = UART.addInstance();
+const UART2         = UART.addInstance();
+const ProjectConfig = scripting.addModule("/ti/project_config/ProjectConfig");
+
+/**
+ * Write custom configuration values to the imported modules.
+ */
+const divider7       = system.clockTree["PLL_PDIV"];
+divider7.divideValue = 2;
+
+const divider9       = system.clockTree["UDIV"];
+divider9.divideValue = 2;
+
+const multiplier2         = system.clockTree["PLL_QDIV"];
+multiplier2.multiplyValue = 5;
+
+const mux8       = system.clockTree["HSCLKMUX"];
+mux8.inputSelect = "HSCLKMUX_SYSPLL2X";
+
+GPIO1.$name                               = "Key";
+GPIO1.associatedPins.create(4);
+GPIO1.associatedPins[0].$name             = "B4";
+GPIO1.associatedPins[0].direction         = "INPUT";
+GPIO1.associatedPins[0].interruptEn       = true;
+GPIO1.associatedPins[0].polarity          = "FALL";
+GPIO1.associatedPins[0].internalResistor  = "PULL_UP";
+GPIO1.associatedPins[0].interruptPriority = "0";
+GPIO1.associatedPins[0].pin.$assign       = "PB4";
+GPIO1.associatedPins[1].$name             = "B15";
+GPIO1.associatedPins[1].direction         = "INPUT";
+GPIO1.associatedPins[1].internalResistor  = "PULL_UP";
+GPIO1.associatedPins[1].interruptEn       = true;
+GPIO1.associatedPins[1].polarity          = "FALL";
+GPIO1.associatedPins[1].interruptPriority = "0";
+GPIO1.associatedPins[1].pin.$assign       = "PB15";
+GPIO1.associatedPins[2].$name             = "B16";
+GPIO1.associatedPins[2].direction         = "INPUT";
+GPIO1.associatedPins[2].internalResistor  = "PULL_UP";
+GPIO1.associatedPins[2].interruptEn       = true;
+GPIO1.associatedPins[2].polarity          = "FALL";
+GPIO1.associatedPins[2].interruptPriority = "0";
+GPIO1.associatedPins[2].pin.$assign       = "PB16";
+GPIO1.associatedPins[3].$name             = "B20";
+GPIO1.associatedPins[3].direction         = "INPUT";
+GPIO1.associatedPins[3].interruptEn       = true;
+GPIO1.associatedPins[3].polarity          = "FALL";
+GPIO1.associatedPins[3].internalResistor  = "PULL_UP";
+GPIO1.associatedPins[3].interruptPriority = "0";
+GPIO1.associatedPins[3].pin.$assign       = "PB20";
+
+const Board = scripting.addModule("/ti/driverlib/Board", {}, false);
+
+GPIO2.$name                          = "LED";
+GPIO2.associatedPins[0].$name        = "B22";
+GPIO2.associatedPins[0].initialValue = "SET";
+GPIO2.associatedPins[0].pin.$assign  = "PB22";
+
+GPIO3.$name                         = "EN";
+GPIO3.associatedPins.create(2);
+GPIO3.associatedPins[0].$name       = "MA";
+GPIO3.associatedPins[0].pin.$assign = "PA1";
+GPIO3.associatedPins[1].$name       = "MB";
+GPIO3.associatedPins[1].pin.$assign = "PA0";
+
+GPIO4.$name                         = "DIR";
+GPIO4.associatedPins.create(2);
+GPIO4.associatedPins[0].$name       = "A";
+GPIO4.associatedPins[0].pin.$assign = "PA8";
+GPIO4.associatedPins[1].$name       = "B";
+GPIO4.associatedPins[1].pin.$assign = "PA9";
+
+GPIO5.$name                         = "Laser";
+GPIO5.associatedPins[0].$name       = "PIN_0";
+GPIO5.associatedPins[0].pin.$assign = "PA15";
+
+I2C1.$name                             = "I2C_OLED";
+I2C1.basicEnableController             = true;
+I2C1.basicControllerStandardBusSpeed   = "Fast";
+I2C1.peripheral.$assign                = "I2C1";
+I2C1.peripheral.sdaPin.$assign         = "PA16";
+I2C1.peripheral.sclPin.$assign         = "PA17";
+I2C1.sdaPinConfig.hideOutputInversion  = scripting.forceWrite(false);
+I2C1.sdaPinConfig.onlyInternalResistor = scripting.forceWrite(false);
+I2C1.sdaPinConfig.passedPeripheralType = scripting.forceWrite("Digital");
+I2C1.sdaPinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric3";
+I2C1.sclPinConfig.hideOutputInversion  = scripting.forceWrite(false);
+I2C1.sclPinConfig.onlyInternalResistor = scripting.forceWrite(false);
+I2C1.sclPinConfig.passedPeripheralType = scripting.forceWrite("Digital");
+I2C1.sclPinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric5";
+
+PWM1.$name                      = "PWM_0";
+PWM1.pwmMode                    = "EDGE_ALIGN_UP";
+PWM1.ccIndex                    = [0];
+PWM1.clockDivider               = 8;
+PWM1.timerStartTimer            = true;
+PWM1.timerCount                 = 2000;
+PWM1.clockPrescale              = 16;
+PWM1.PWM_CHANNEL_0.$name        = "ti_driverlib_pwm_PWMTimerCC0";
+PWM1.ccp0PinConfig.$name        = "ti_driverlib_gpio_GPIOPinGeneric2";
+PWM1.peripheral.ccp0Pin.$assign = "PA26";
+
+PWM2.clockDivider                       = 8;
+PWM2.ccIndex                            = [0];
+PWM2.pwmMode                            = "EDGE_ALIGN_UP";
+PWM2.timerStartTimer                    = true;
+PWM2.$name                              = "servo_2";
+PWM2.clockPrescale                      = 10;
+PWM2.timerCount                         = 20000;
+PWM2.PWM_CHANNEL_0.$name                = "ti_driverlib_pwm_PWMTimerCC2";
+PWM2.ccp0PinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric4";
+PWM2.ccp0PinConfig.direction            = scripting.forceWrite("OUTPUT");
+PWM2.ccp0PinConfig.hideOutputInversion  = scripting.forceWrite(false);
+PWM2.ccp0PinConfig.onlyInternalResistor = scripting.forceWrite(false);
+PWM2.ccp0PinConfig.passedPeripheralType = scripting.forceWrite("Digital");
+PWM2.peripheral.ccp0Pin.$assign         = "PA29";
+
+SYSCTL.clockTreeEn = true;
+scripting.suppress("For best practices when the CPUCLK is running at 32MHz and above, clear the flash status bit using DL_FlashCTL_executeClearStatus\\(\\) before executing any flash operation\\. Otherwise there may be false positives\\.", SYSCTL);
+
+TIMER1.$name            = "TIMER_0";
+TIMER1.timerClkDiv      = 8;
+TIMER1.timerClkPrescale = 50;
+TIMER1.timerMode        = "PERIODIC";
+TIMER1.timerPeriod      = "10 ms";
+TIMER1.timerStartTimer  = true;
+TIMER1.interrupts       = ["ZERO"];
+
+UART1.uartClkDiv                       = "4";
+UART1.targetBaudRate                   = 115200;
+UART1.enabledInterrupts                = ["RX"];
+UART1.$name                            = "UART_1";
+UART1.peripheral.rxPin.$assign         = "PB18";
+UART1.txPinConfig.direction            = scripting.forceWrite("OUTPUT");
+UART1.txPinConfig.hideOutputInversion  = scripting.forceWrite(false);
+UART1.txPinConfig.onlyInternalResistor = scripting.forceWrite(false);
+UART1.txPinConfig.passedPeripheralType = scripting.forceWrite("Digital");
+UART1.txPinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric0";
+UART1.rxPinConfig.hideOutputInversion  = scripting.forceWrite(false);
+UART1.rxPinConfig.onlyInternalResistor = scripting.forceWrite(false);
+UART1.rxPinConfig.passedPeripheralType = scripting.forceWrite("Digital");
+UART1.rxPinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric1";
+
+UART2.$name                            = "UART_0";
+UART2.targetBaudRate                   = 115200;
+UART2.uartClkDiv                       = "4";
+UART2.enabledInterrupts                = ["RX"];
+UART2.peripheral.rxPin.$assign         = "PB3";
+UART2.txPinConfig.direction            = scripting.forceWrite("OUTPUT");
+UART2.txPinConfig.hideOutputInversion  = scripting.forceWrite(false);
+UART2.txPinConfig.onlyInternalResistor = scripting.forceWrite(false);
+UART2.txPinConfig.passedPeripheralType = scripting.forceWrite("Digital");
+UART2.txPinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric6";
+UART2.rxPinConfig.hideOutputInversion  = scripting.forceWrite(false);
+UART2.rxPinConfig.onlyInternalResistor = scripting.forceWrite(false);
+UART2.rxPinConfig.passedPeripheralType = scripting.forceWrite("Digital");
+UART2.rxPinConfig.$name                = "ti_driverlib_gpio_GPIOPinGeneric7";
+
+ProjectConfig.deviceSpin = "MSPM0G3507";
+
+/**
+ * Pinmux solution for unlocked pins/peripherals. This ensures that minor changes to the automatic solver in a future
+ * version of the tool will not impact the pinmux you originally saw.  These lines can be completely deleted in order to
+ * re-solve from scratch.
+ */
+Board.peripheral.$suggestSolution          = "DEBUGSS";
+Board.peripheral.swclkPin.$suggestSolution = "PA20";
+Board.peripheral.swdioPin.$suggestSolution = "PA19";
+PWM1.peripheral.$suggestSolution           = "TIMG7";
+PWM2.peripheral.$suggestSolution           = "TIMG6";
+TIMER1.peripheral.$suggestSolution         = "TIMA0";
+UART1.peripheral.$suggestSolution          = "UART2";
+UART1.peripheral.txPin.$suggestSolution    = "PA21";
+UART2.peripheral.$suggestSolution          = "UART3";
+UART2.peripheral.txPin.$suggestSolution    = "PA14";

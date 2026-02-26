@@ -1,0 +1,15 @@
+# 编译输出文件夹
+Debug/
+Release/
+Flash/
+
+# 临时文件
+*.obj
+*.mk
+*.bk
+*.bak
+*.tmp
+
+.launches/
+.settings/
+
